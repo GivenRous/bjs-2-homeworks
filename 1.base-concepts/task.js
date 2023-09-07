@@ -16,25 +16,12 @@ function solveEquation(a, b, c) {
 solveEquation(1, 5, 4);
 
 function calculateTotalMortgage(percent, contribution, amount, countMonths) {
-  let p = parseInt(percent) / 100 / 12;
-  let con = parseInt(contribution);
-  let am = parseInt(amount);
-  let s = am - con;
-  let n = parseInt(countMonths);
+  let monthPercent = percent / 100 / 12;
+  let debt = amount - contribution;
 
-  if (isNaN(p) || p < 0) {
-    return 'false';
-  } else if (isNaN(con) || con < 0) {
-    return 'false';
-  } else if (isNaN(am) || am < 0) {
-    return 'false';
-  } else {
-    let monthAmount = s * (p + (p / (((1 + p) ** n) - 1)));
-    let totalAmount = monthAmount * n;
-    return totalAmount.toFixed(2);
+  let monthAmount = debt * (monthPercent + (monthPercent / (((1 + monthPercent) ** countMonths) - 1)));
+  let totalAmount = monthAmount * countMonths;
+  return +totalAmount.toFixed(2);
   }
-}
 
 calculateTotalMortgage(10, 1000, 20000, 24);
-//не понимаю, почему тест выдает ошибку: Expected '52749.53' to equal 52749.53.
-//проверяю typeof(totalAmount) - number
